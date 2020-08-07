@@ -1,3 +1,4 @@
+// @ts-ignore
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -8,8 +9,12 @@ Vue.config.productionTip = false
 import libs from "../packages"
 console.log(libs)
 Vue.use(libs)
+// 全局指令
+// @ts-ignore
+// import animation from '@/directive/animation.js'
+// Vue.directive('animation', animation)
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')
