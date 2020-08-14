@@ -6,6 +6,7 @@ import store from './store'
 import './utils/rem'
 Vue.config.productionTip = false
 //main.js
+// @ts-ignore
 import libs from "../packages"
 console.log(libs)
 Vue.use(libs)
