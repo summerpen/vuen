@@ -2,6 +2,7 @@
 
 ## 根目录下新建 directives/elTableLoadMore.js
 
+
 ``` js
 import Vue from 'vue'
 Vue.directive('loadmore', {
