@@ -8,6 +8,9 @@
     <body>
         <canvas id="paper" width="0" height="0"></canvas>
         <script>
+            /**
+            * 加载图片
+            */
             function loadImage(src) {
                 const img = new Image()
                 img.crossOrigin = 'anonymous'
@@ -53,7 +56,24 @@
                 }
                 return imageData
             }
-
+            /**
+            * 灰度化图片的处理过程，就可以描述成如下的颜色矩阵
+            */
+            
+            function grayscale(p = 1) {
+                const r = 0.2126 * p;
+                const g = 0.7152 * p;
+                const b = 0.0722 * p;
+                return [
+                    r + 1 - p, g, b, 0, 0,
+                    // 
+                    r, g + 1 - p, b, 0, 0,
+                    // 
+                    r, g, b + 1 - p, 0, 0,
+                    // 
+                    0, 0, 0, 1, 0,
+                ];
+            }
             const canvas = document.getElementById('paper')
             const context = canvas.getContext('2d')
             async function load() {

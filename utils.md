@@ -1,3 +1,19 @@
+# safari代理ie
+
+``` 
+Internet Explorer 8, Windows XP, Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)
+Internet Explorer 8, Windows Vista, Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; WOW64; Trident/4.0; )
+Internet Explorer 8, Windows 7, Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)
+Internet Explorer 9, Windows Vista, Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.0)
+Internet Explorer 9, Windows 7, Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)
+Internet Explorer 10, Windows 7, Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)
+Internet Explorer 10, Windows 8, Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2)
+Internet Explorer 11, Windows 7, Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0)
+Internet Explorer 11, Windows 8, Mozilla/5.0 (Windows NT 6.2; Trident/7.0; rv:11.0)
+Internet Explorer 11, Windows 8.1, Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0)
+Internet Explorer 11, Windows 10, Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0)
+```
+
 # 十六进制颜色转rgba (安卓webview不兼容十六进制颜色(八位数)处理)
 
 ``` js
