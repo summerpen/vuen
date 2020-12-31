@@ -1,4 +1,4 @@
-#自定义触发事件
+#自定义事件
 
 ``` js
 var myEvent = new CustomEvent('deviceready', {
