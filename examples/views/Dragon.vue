@@ -70,6 +70,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .dragon {
+    
     width: 100%;
     height: 100%;
     #container {
