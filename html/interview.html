@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button onclick="myClear">myClear</button>
+    </body>
+    <script>
+        // 1. 写一个 mySetInterVal(fn, a, b),每次间隔 a,a+b,a+2b 的时间，然后写一个 myClear，停止上面的 mySetInterVal
+        /* function mySetInterVal(fn, a, b) {
+            let timer = null
+            const settimer = function(fn, a, b) {
+                timer = setTimeout(() => {
+                    fn()
+                    settimer(fn, a + b, b)
+                }, a)
+            }
+            settimer(fn, a, b)
+            return timer
+        }
+
+        const timer = mySetInterVal(
+            () => {
+                console.log('timer', new Date().getSeconds())
+            },
+            1000,
+            1000
+        )
+        function myClear(timer) {
+            timer && clearTimeout(timer)
+        } */
+        // 2.合并二维有序数组成一维有序数组，归并排序的思路
+
+        // 不使用归并排序时
+        // 方法1：使用concat
+        const flatten1 = (arr) => {
+            while (arr.some((item) => Array.isArray(item))) {
+                arr = [].concat(...arr)
+            }
+            return arr
+        }
+        const mergeSort1 = (arr) => flatten1(arr).sort((a, b) => a - b)
+        // 方法2：使用reduce
+        const flatten2 = (arr) => arr.reduce((acc, cur) => (Array.isArray(cur) ? [...acc, ...flatten2(cur)] : [...acc, cur]), [])
+        const mergeSort2 = (arr) => flatten2(arr).sort((a, b) => a - b)
+        // 方法三
+        function mergeSort(arr) {
+            const len = arr.length
+            // 处理边界情况
+            if (len <= 1) {
+                return arr[0]
+            }
+            // 计算分割点
+            const mid = Math.floor(len / 2)
+            // 递归分割左子数组，然后合并为有序数组
+            const leftArr = mergeSort(arr.slice(0, mid))
+            // 递归分割右子数组，然后合并为有序数组
+            const rightArr = mergeSort(arr.slice(mid, len))
+            // 合并左右两个有序数组
+            arr = mergeArr(leftArr, rightArr)
+            // 返回合并后的结果
+            return arr
+        }
+
+        function mergeArr(arr1, arr2) {
+            // 初始化两个指针，分别指向 arr1 和 arr2
+            let i = 0,
+                j = 0
+            // 初始化结果数组
+            const res = []
+            // 缓存arr1的长度
+            const len1 = arr1.length
+            // 缓存arr2的长度
+            const len2 = arr2.length
+            // 合并两个子数组
+            while (i < len1 && j < len2) {
+                if (arr1[i] < arr2[j]) {
+                    res.push(arr1[i])
+                    i++
+                } else {
+                    res.push(arr2[j])
+                    j++
+                }
+            }
+            // 若其中一个子数组首先被合并完全，则直接拼接另一个子数组的剩余部分
+            if (i < len1) {
+                return res.concat(arr1.slice(i))
+            } else {
+                return res.concat(arr2.slice(j))
+            }
+        }
+
+        var arr = [
+            [1, 2, 4],
+            [2, 3, 7],
+            [3, 5, 7],
+            [4, 5, 8],
+        ]
+        mergeSort(arr)
+
+        // 方法四
+        /**
+         * 解题思路：
+         * 双指针 从头到尾比较 两个数组的第一个值，根据值的大小依次插入到新的数组中
+         * 空间复杂度：O(m + n)
+         * 时间复杂度：O(m + n)
+         * @param {Array} arr1
+         * @param {Array} arr2
+         */
+
+        function merge(arr1, arr2) {
+            var result = []
+            while (arr1.length > 0 && arr2.length > 0) {
+                if (arr1[0] < arr2[0]) {
+                    /*shift()方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。*/
+                    result.push(arr1.shift())
+                } else {
+                    result.push(arr2.shift())
+                }
+            }
+            return result.concat(arr1).concat(arr2)
+        }
+
+        function mergeSort(arr) {
+            let lengthArr = arr.length
+            if (lengthArr === 0) {
+                return []
+            }
+            while (arr.length > 1) {
+                let arrayItem1 = arr.shift()
+                let arrayItem2 = arr.shift()
+                let mergeArr = merge(arrayItem1, arrayItem2)
+                arr.push(mergeArr)
+            }
+            return arr[0]
+        }
+        let arr1 = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 2, 3],
+            [4, 5, 6],
+        ]
+        let arr2 = [
+            [1, 4, 6],
+            [7, 8, 10],
+            [2, 6, 9],
+            [3, 7, 13],
+            [1, 5, 12],
+        ]
+        mergeSort(arr1)
+        mergeSort(arr2)
+
+        // 3.斐波那契数列
+        /*
+            F(0) = 0;
+            F(1) = 1;
+            F(n) = F(n - 1) + F(n - 2);
+        */
+        //  1,1,2,3,5,8,13,21,34,55
+        //  1 2 3 4 5 6 7  8  9  10
+        // 无 尾递归优化版本
+        function fib(n) {
+            if (n < 0) throw new Error('输入的数字不能小于0')
+            if (n < 2) {
+                return n
+            }
+            return fib(n - 1) + fib(n - 2)
+        }
+
+        function fib(n) {
+            if (n < 0) throw new Error('输入的数字不能小于0')
+            if (n < 2) return n
+            function fiber(a, b, n) {
+                if (n === 0) {
+                    return a
+                }
+                return fiber(b, a + b, n - 1)
+            }
+            return fiber(0, 1, n)
+        }
+
+        // 基于 ES6 Generator 实现
+        function* fib1(n) {
+            if (n < 0) throw new Error('输入的数字不能小于0')
+            let f0 = 1,
+                f1 = 1,
+                count = 0
+            while (count < n) {
+                yield f0
+                ;[f0, f1] = [f1, f0 + f1]
+                count++
+            }
+        }
+        for (let n of fib1(10)) {
+            console.log(n)
+        }
+        // 使用数组
+        function fib(n) {
+            if (n < 0) throw new Error('输入的数字不能小于0')
+            if (n < 2) {
+                return n
+            }
+            let list = []
+            list[0] = 0
+            list[1] = 1
+            for (let i = 1; i < n; i++) {
+                list[i + 1] = list[i] + list[i - 1]
+            }
+            return list[n]
+        }
+        // 4.字符串出现的不重复最长长度
+        //    TODO:
+        // 5.介绍chrome 浏览器的几个版本
+        /*
+            1）Chrome 浏览器提供 4 种发布版本，即稳定版(Stable)、测试版(Beta)、开发者版(Dev)和金丝雀版(Canary)。
+            虽然 Chrome 这几个版本名称各不相同，但都沿用了相同的版本号，只是更新早晚的区别。就好比 iOS 等系统，Beta 版可以率先更新到 iOS 12 并进行测试，不断改进稳定后，正式版才升级到 12 版本。
+            Chrome 也是如此，更新最快的 Canary 会领先正式版 1-2 个版本。
+
+                1.Canary（金丝雀） 版
+
+                只限用于测试，Canary 是 Chrome 的未来版本，是功能、代码最先进的Chrome 版本，一方面软件本身没有足够时间测试，另一方面网页也不一定支持这些全新的功能，因此极不稳定。好在，谷歌将其设定为可独立安装、与其他版本的 Chrome 程序共存，因此适合进阶用户安装备用，尝鲜最新功能。这种不稳定性使得 Canary 版目前并不适合日常使用。
+                Chrome Canary 是更新速度最快的 Chrome 版本，几乎每天更新。它相当于支持自动更新、并添加了谷歌自家服务与商业闭源插件（Flash 等）的 Chromium，更加强大好用。
+                2.开发者版(Dev)
+
+                Chrome Dev 最初是以 Chromium 为基础、更新最快的 Chrome，后来则被 Canary 取代。Dev 版每周更新一次，虽然仍不太稳定，但已经可以勉强满足日常使用，适合 Web 开发者用来测试新功能和网页。
+                让 IT 人员使用开发者版，开发者可以通过开发者版测试自己公司的应用，确保这些应用能与Chrome 最新的 API 更改及功能更改兼容。注意：开发者版并非百分之百稳定，但开发者可以提前 9 至 12 周体验即将添加到 Chrome 稳定版的功能。
+                3.测试版(Beta)
+
+                Chrome Beta 以 Dev 为基础，每月更新一次。它是正式发布前的最后测试版本，所有功能都已在前面几个版本中得到测试并改进，因此已经十分稳定，普通用户也可以用来日常使用
+                让 5% 的用户使用测试版，测试版用户可以提前 4-6 周体验即将在 Chrome 稳定版中推出的功能。测试版用户可以发现特定版本可能存在的问题，让您可以先解决问题，然后再向所有用户推出该版本。
+                4.稳定版(Stable)
+
+                最后的 Chrome Stable 就是我们熟知的正式版，它以 Beta 为基础，几个月更新一次。由于所有的功能都已经过数个月反复测试，是稳定性最高的 Chrome 版本。
+                让大多数用户使用稳定版，稳定版是已进行充分测试的版本，稳定版每 2-3 周会进行一次小幅更新，并且每 6 周会进行一次重大更新。
+                所以要定期下载开发者版，体验Chrome 最新的 API和新功能 ，发现自己的应用跟新API和新功能的是否有兼容问题，找到开发亮点。
+
+            2）对于Chrome的历史版本测试
+            可以使用Docker Selenium 做分布式自动化测试，部署多个重点关注的版本，进行自动化测试，对比差异。
+        */
+        // 15 实现 add(1)(2)(3)
+        function add(a) {
+            return function(b) {
+                return function(c) {
+                    return a + b + c
+                }
+            }
+        }
+        console.log(add(1)(2)(3)) // 6
+
+        // 参数固定
+        const curry = (fn) => (judge = (...args) => (args.length === fn.length ? fn(...args) : (...arg) => judge(...args, ...arg)))
+        const add1 = (a, b, c) => a + b + c
+        const curryAdd = curry(add1)
+        console.log(curryAdd(1)(2)(3)) // 6
+        console.log(curryAdd(1, 2)(3)) // 6
+        console.log(curryAdd(1)(2, 3)) // 6
+
+        // 参数不固定
+        function add2(...args) {
+            //求和
+            return args.reduce((a, b) => a + b)
+        }
+
+        function currying(fn) {
+            let args = []
+            return function temp(...newArgs) {
+                if (newArgs.length) {
+                    args = [...args, ...newArgs]
+                    return temp
+                } else {
+                    let val = fn.apply(this, args)
+                    args = [] //保证再次调用时清空
+                    return val
+                }
+            }
+        }
+
+        let addCurry = currying(add2)
+        console.log(addCurry(1)(2)(3)(4, 5)()) //15
+        console.log(addCurry(1)(2)(3, 4, 5)()) //15
+        console.log(addCurry(1)(2, 3, 4, 5)()) //15
+
+        // 16.实现链式调用
+        /*
+            链式调用的核心就在于调用完的方法将自身实例返回
+        
+        */
+        function Class1() {
+            console.log('初始化')
+        }
+        Class1.prototype.method = function(param) {
+            console.log(param)
+            return this
+        }
+        let cl = new Class1()
+        //由于new 在实例化的时候this会指向创建的对象， 所以this.method这个方法会在原型链中找到。
+        cl.method('第一次调用')
+            .method('第二次链式调用')
+            .method('第三次链式调用')
+
+        var obj = {
+            a: function() {
+                console.log('a')
+                return this
+            },
+            b: function() {
+                console.log('b')
+                return this
+            },
+        }
+        obj.a().b()
+        class Math {
+            constructor(value) {
+                this.hasInit = true
+                this.value = value
+                if (!value) {
+                    this.value = 0
+                    this.hasInit = false
+                }
+            }
+            add() {
+                let args = [...arguments]
+                let initValue = this.hasInit ? this.value : args.shift()
+                const value = args.reduce((prev, curv) => prev + curv, initValue)
+                return new Math(value)
+            }
+            minus() {
+                let args = [...arguments]
+                let initValue = this.hasInit ? this.value : args.shift()
+                const value = args.reduce((prev, curv) => prev - curv, initValue)
+                return new Math(value)
+            }
+        }
+        let test = new Math()
+        const res = test.add(222, 333, 444).minus(333, 222)
+        console.log(res.value)
+        // 原型链
+        Number.prototype.add = function() {
+            let _that = this
+            _that = [...arguments].reduce((prev, curv) => prev + curv, _that)
+            return _that
+        }
+        Number.prototype.minus = function() {
+            let _that = this
+            _that = [...arguments].reduce((prev, curv) => prev - curv, _that)
+            return _that
+        }
+        Number.prototype.mul = function() {
+            let _that = this
+            _that = [...arguments].reduce((prev, curv) => prev * curv, _that)
+            return _that
+        }
+        Number.prototype.divide = function() {
+            let _that = this
+            _that = [...arguments].reduce((prev, curv) => prev / (+curv ? curv : 1), _that)
+            return _that
+        }
+        let num = 0
+        let newNum = num
+            .add(222, 333, 444)
+            .minus(333, 222)
+            .mul(3, 3)
+            .divide(2, 3)
+        console.log(newNum)
+        // Promise
+        class mPromise1 {
+            constructor(executor) {
+                this.state = 'pending'
+                this.value = undefined
+                this.reason = undefined
+                let resolve = (value) => {
+                    if (this.state === 'pending') {
+                        this.state = 'fulfilled'
+                        this.value = value
+                    }
+                }
+                let reject = (reason) => {
+                    if (this.state === 'pending') {
+                        this.state = 'rejected'
+                        this.reason = reason
+                    }
+                }
+                try {
+                    // 立即执行函数
+                    executor(resolve, reject)
+                } catch (err) {
+                    reject(err)
+                }
+            }
+            then(onFulfilled, onRejected) {
+                if (this.state === 'fulfilled') {
+                    let x = onFulfilled(this.value)
+                }
+                if (this.state === 'rejected') {
+                    let x = onRejected(this.reason)
+                }
+            }
+        }
+        new mPromise1((resolve, reject) => {
+            resolve(1)
+        })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+        // 大厂专供版
+        const PENDING = 'pending'
+        const FULFILLED = 'fulfilled'
+        const REJECTED = 'rejected'
+        const resolvePromise = (promise, x, resolve, reject) => {
+            if (x === promise) {
+                // If promise and x refer to the same object, reject promise with a TypeError as the reason.
+                reject(new TypeError('循环引用'))
+            }
+            // if x is an object or function,
+            if ((x !== null && typeof x === 'object') || typeof x === 'function') {
+                // If both resolvePromise and rejectPromise are called, or multiple calls to the same argument are made, the first call takes precedence, and any further calls are ignored.
+                let called
+                try {
+                    // If retrieving the property x.then results in a thrown exception e, reject promise with e as the reason.
+                    let then = x.then // Let then be x.then
+                    // If then is a function, call it with x as this
+                    if (typeof then === 'function') {
+                        // If/when resolvePromise is called with a value y, run [[Resolve]](promise, y)
+                        // If/when rejectPromise is called with a reason r, reject promise with r.
+                        then.call(
+                            x,
+                            (y) => {
+                                if (called) return
+                                called = true
+                                resolvePromise(promise, y, resolve, reject)
+                            },
+                            (r) => {
+                                if (called) return
+                                called = true
+                                reject(r)
+                            }
+                        )
+                    } else {
+                        // If then is not a function, fulfill promise with x.
+                        resolve(x)
+                    }
+                } catch (e) {
+                    if (called) return
+                    called = true
+                    reject(e)
+                }
+            } else {
+                // If x is not an object or function, fulfill promise with x
+                resolve(x)
+            }
+        }
+        function Promise(excutor) {
+            let that = this // 缓存当前promise实例例对象
+            that.status = PENDING // 初始状态
+            that.value = undefined // fulfilled状态时 返回的信息
+            that.reason = undefined // rejected状态时 拒绝的原因
+            that.onFulfilledCallbacks = [] // 存储fulfilled状态对应的onFulfilled函数
+            that.onRejectedCallbacks = [] // 存储rejected状态对应的onRejected函数
+            function resolve(value) {
+                // value成功态时接收的终值
+                if (value instanceof Promise) {
+                    return value.then(resolve, reject)
+                }
+                // 实践中要确保 onFulfilled 和 onRejected ⽅方法异步执⾏行行，且应该在 then ⽅方法被调⽤用的那⼀一轮事件循环之后的新执⾏行行栈中执⾏行行。
+                setTimeout(() => {
+                    // 调⽤用resolve 回调对应onFulfilled函数
+                    if (that.status === PENDING) {
+                        // 只能由pending状态 => fulfilled状态 (避免调⽤用多次resolve reject)
+                        that.status = FULFILLED
+                        that.value = value
+                        that.onFulfilledCallbacks.forEach((cb) => cb(that.value))
+                    }
+                })
+            }
+            function reject(reason) {
+                // reason失败态时接收的拒因
+                setTimeout(() => {
+                    // 调⽤用reject 回调对应onRejected函数
+                    if (that.status === PENDING) {
+                        // 只能由pending状态 => rejected状态 (避免调⽤用多次resolve reject)
+                        that.status = REJECTED
+                        that.reason = reason
+                        that.onRejectedCallbacks.forEach((cb) => cb(that.reason))
+                    }
+                })
+            }
+
+            // 捕获在excutor执⾏行行器器中抛出的异常
+            // new Promise((resolve, reject) => {
+            //     throw new Error('error in excutor')
+            // })
+            try {
+                excutor(resolve, reject)
+            } catch (e) {
+                reject(e)
+            }
+        }
+        Promise.prototype.then = function(onFulfilled, onRejected) {
+            const that = this
+            let newPromise
+            // 处理理参数默认值 保证参数后续能够继续执⾏行行
+            onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+            onRejected =
+                typeof onRejected === 'function'
+                    ? onRejected
+                    : (reason) => {
+                          throw reason
+                      }
+            if (that.status === FULFILLED) {
+                // 成功态
+                return (newPromise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        try {
+                            let x = onFulfilled(that.value)
+                            resolvePromise(newPromise, x, resolve, reject) //新的promise resolve 上⼀一个onFulfilled的返回值
+                        } catch (e) {
+                            reject(e) // 捕获前⾯面onFulfilled中抛出的异常then(onFulfilled, onRejected);
+                        }
+                    })
+                }))
+            }
+            if (that.status === REJECTED) {
+                // 失败态
+                return (newPromise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        try {
+                            let x = onRejected(that.reason)
+                            resolvePromise(newPromise, x, resolve, reject)
+                        } catch (e) {
+                            reject(e)
+                        }
+                    })
+                }))
+            }
+            if (that.status === PENDING) {
+                // 等待态
+                // 当异步调⽤用resolve/rejected时 将onFulfilled/onRejected收集暂存到集合中
+                return (newPromise = new Promise((resolve, reject) => {
+                    that.onFulfilledCallbacks.push((value) => {
+                        try {
+                            let x = onFulfilled(value)
+                            resolvePromise(newPromise, x, resolve, reject)
+                        } catch (e) {
+                            reject(e)
+                        }
+                    })
+                    that.onRejectedCallbacks.push((reason) => {
+                        try {
+                            let x = onRejected(reason)
+                            resolvePromise(newPromise, x, resolve, reject)
+                        } catch (e) {
+                            reject(e)
+                        }
+                    })
+                }))
+            }
+        }
+    </script>
+</html>
