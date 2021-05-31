@@ -1,3 +1,40 @@
+### Vue父组件监听子组件的生命周期
+
+* 实现方式一
+
+```
+// Parent.vue
+<Child @mounted="doSomething" />
+
+// Child.vue
+mounted() {
+    this.$emit("mounted");
+}
+```
+
+* 实现方式二
+
+```
+//  Parent.vue
+<Child @hook:mounted="doSomething" ></Child>
+
+doSomething() {
+   console.log('父组件监听到 mounted 钩子函数 ...');
+},
+    
+//  Child.vue
+mounted(){
+   console.log('子组件触发 mounted 钩子函数 ...');
+},  
+
+// 以上输出顺序为：
+// 子组件触发 mounted 钩子函数 ...
+// 父组件监听到 mounted 钩子函数 ..
+当然 @hook 方法不仅仅是可以监听 mounted，其它的生命周期事件，例如：created，updated 等都可以监听。
+
+```
+
+
 ### 发布订阅模式
 
 ```js
@@ -87,9 +124,9 @@ process.nextTick(() => {
 });
 setTimeout(() => {
     console.log(9);
-      process.nextTick(() => {
-          console.log(10);
-      });
+    process.nextTick(() => {
+        console.log(10);
+    });
     new Promise((resolve) => {
         console.log(11);
         resolve();
@@ -101,3 +138,33 @@ setTimeout(() => {
 // ### 1 7 6 8 2 4 3 5 9 11 10 12 node中
 ```
 
+```js
+function fn() {
+    // 创建两个局部变量
+    const a1 = new GCSignal(1);
+    const a2 = new GCSignal(2);
+    global.tmp = a2;
+    // 将 a2 变量赋值给全局变量
+    const o = {};
+    trackGarbageCollection(o, 3);
+    // 跟踪局部变量 o 的 GC 状态，标识为 3
+}
+let obj = {};
+trackGarbageCollection(obj, 4); // 跟踪变量 obj 的 GC 状态，标识为 4
+fn();
+// 函数内创建了 3 个局部变量 a1、a2、o
+// 但是 a2 赋值给了全局变量
+// 函数调用完后，a1 和 o 会被释放
+%
+CollectGarbage(null); // V8 Native 函数，手动触发 GC
+console.log(consumeSignals()); // [1, 3]
+obj = undefined;
+// obj 原来的值为空对象({})，通过将 obj 设置为 undefined 回收原来的对象
+%
+CollectGarbage(null); // V8 Native 函数，手动触发 GC
+console.log(consumeSignals()); // [4]
+global.tmp = undefined; // 同上
+%
+CollectGarbage(null); // V8 Native 函数，手动触发 GC
+console.log(consumeSignals()); // [2]
+```
