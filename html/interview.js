@@ -13,6 +13,49 @@ for (let i = 0; i < 100; i++) {
     node = new MyNode(node)
 }
 
+// 实现flat
+function test27() {
+    const arr = [1, 2, 3, 4, [1, 2, 3, [1, 2, 3, [1, 2, 3]]], 5, 'string', { name: '弹铁蛋同学' }]
+
+    // 首先使用 reduce 展开一层
+    arr.reduce((pre, cur) => pre.concat(cur), [])
+    // [1, 2, 3, 4, 1, 2, 3, [1, 2, 3, [1, 2, 3]], 5, "string", { name: "弹铁蛋同学" }];
+
+    // 用 reduce 展开一层 + 递归
+    const flat = (arr) => {
+        return arr.reduce((pre, cur) => {
+            return pre.concat(Array.isArray(cur) ? flat(cur) : cur)
+        }, [])
+    }
+    // 栈思想
+    function flat1(arr) {
+        const result = []
+        const stack = [].concat(arr) // 将数组元素拷贝至栈，直接赋值会改变原数组
+        //如果栈不为空，则循环遍历
+        while (stack.length !== 0) {
+            const val = stack.pop()
+            if (Array.isArray(val)) {
+                stack.push(...val) //如果是数组再次入栈，并且展开了一层
+            } else {
+                result.unshift(val) //如果不是数组就将其取出来放入结果数组中
+            }
+        }
+        return result
+    }
+    const arr = [1, 2, 3, 4, [1, 2, 3, [1, 2, 3, [1, 2, 3]]], 5, 'string', { name: '弹铁蛋同学' }]
+    flat1(arr)
+
+    // 通过传入整数参数控制“拉平”层数
+    // [1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 1, 2, 3, 5, "string", { name: "弹铁蛋同学" }];
+    // reduce + 递归
+    function flat2(arr, num = 1) {
+        return num > 0 ? arr.reduce((pre, cur) => pre.concat(Array.isArray(cur) ? flat2(cur, num - 1) : cur), []) : arr.slice()
+    }
+    const arr = [1, 2, 3, 4, [1, 2, 3, [1, 2, 3, [1, 2, 3]]], 5, 'string', { name: '弹铁蛋同学' }]
+    flat2(arr, Infinity)
+    // [1, 2, 3, 4, 1, 2, 3, 1, 2, 3, 1, 2, 3, 5, "string", { name: "弹铁蛋同学" }];
+}
+
 // 大数相加
 function test26() {
     function bigNumAdd(num1, num2) {
