@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+            }
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+            }
+
+            .sector {
+                width: 0;
+                height: 0;
+                border-width: 100px;
+                border-style: solid;
+                border-color: lightgreen transparent transparent transparent;
+                border-radius: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <hr />
+        <div class="sector"></div>
+        <div>2222</div>
+        <ul id="root">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <div>111</div>
+    </body>
+    <script>
+        // 使用文档片段
+        function reverseChildNodes(node) {
+            //创建文档片段
+            let frag = node.ownerDocument.createDocumentFragment()
+            //每次取出node节点的最后一个子节点
+            while (node.lastChild) {
+                debugger
+                //取出节点的过程中也会将节点从原父节点中移除
+                //然后形成倒序结构
+                frag.appendChild(node.lastChild)
+            }
+            //将文档碎片挂在node节点之下
+            node.appendChild(frag)
+        }
+        var list = document.querySelector('ul')
+        reverseChildNodes(list)
+    </script>
+</html>
