@@ -43,7 +43,6 @@
             let frag = node.ownerDocument.createDocumentFragment()
             //每次取出node节点的最后一个子节点
             while (node.lastChild) {
-                debugger
                 //取出节点的过程中也会将节点从原父节点中移除
                 //然后形成倒序结构
                 frag.appendChild(node.lastChild)
