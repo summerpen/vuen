@@ -12,6 +12,97 @@ let node = new MyNode(null)
 for (let i = 0; i < 100; i++) {
     node = new MyNode(node)
 }
+function test31() {
+    // 字符串反向
+    arr.split('')
+        .reverse()
+        .join('')
+    //
+    function removeDuplicate(arr) {
+        if (arr === null || arr.length < 2) {
+            return arr
+        }
+        let res = [],
+            hash = {}
+        for (let i = 0; i < arr.length; i++) {
+            if (!hash[item]) {
+                res.push(item)
+                hash[item] = 1
+            } else {
+                hash[item]++
+            }
+        }
+        console.log(hash)
+        return res
+    }
+    ;[...new Set(arr)]
+    Array.from(new Set(arr))
+    function unique1(arr) {
+        let res = []
+        for (let index = 0; index < arr.length; index++) {
+            const element = arr[index]
+
+            if (res.indexOf(element) === -1) {
+                //  !res.includes(element) 也可
+                res.push(element)
+            }
+        }
+        return res
+    }
+}
+function test30() {
+    function binSeac(arr, target, start = 0, end = arr.length) {
+        if (start > end) {
+            return -1
+        }
+        let index = Math.floor((start + end) / 2)
+        let val = arr[index]
+        if (target < val) {
+            return binSeac(arr, target, start, index - 1)
+        } else if (target > val) {
+            return binSeac(arr, target, index + 1, end)
+        } else if (target == val) {
+            return index
+        }
+    }
+
+    // 二分查找元素 (数组需要为有序数组)
+    function binarySearch(arr, target, start, end) {
+        let index = Math.floor((start + end) / 2)
+        if (index === start && target != arr[index]) {
+            return -1
+        } else if (index === start && target === arr[index]) {
+            return index
+        }
+        if (target < arr[index]) {
+            return binarySearch(arr, target, satrt, index)
+        } else if (target > arr[index]) {
+            return binarySearch(arr, target, index, end)
+        } else {
+            return index
+        }
+    }
+    function binSearch(arr, target, start, end) {
+        while (end - start > 1) {
+            //
+            const index = Math.floor((start + end) / 2)
+            if (target < arr[index]) {
+                end = index
+            } else if (target > arr[index]) {
+                start = index
+            } else {
+                return index
+            }
+        }
+        if (arr[start] == target) {
+            return start
+        } else if (arr[end] == target) {
+            return end
+        } else {
+            return -1
+        }
+    }
+}
 
 function test29() {
     // 使用文档片段
