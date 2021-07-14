@@ -1,0 +1,258 @@
+// 备份vscode的配置文件
+{
+  // 需要安装插件: "Vetur" "Prettier - Code formatter" "ESLint"
+  // vscode配置
+  "editor.detectIndentation": false,
+  // "editor.formatOnSave": true,
+  // "editor.formatOnPaste": true,
+  "editor.tabSize": 4,
+  // 保存时按eslint格式进⾏修复
+  // "eslint.autoFixOnSave": true,
+  "html.format.wrapLineLength": 150,
+  // prettier配置
+  // ⾏宽
+  "prettier.printWidth": 150,
+  // 保留结尾的分号:";"
+  "prettier.semi": false,
+  // 使⽤单引号
+  "prettier.singleQuote": true,
+  // 缩进4个空格
+  "prettier.tabWidth": 4,
+  // vetur配置: vue⽂件格式化
+  "vetur.format.options.tabSize": 4,
+  "vetur.format.defaultFormatter.html": "prettyhtml",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "vetur.format.defaultFormatterOptions": {
+    "prettyhtml": {
+      "printWidth": 150,
+      "singleQuote": true,
+      "wrapAttributes": false,
+      "sortAttributes": false
+    },
+    "prettier": {
+      "semi": false,
+      "singleQuote": true,
+      "printWidth": 150
+    }
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[ts]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "svn.enableProposedApi": "none",
+  "glassit.alpha": 250,
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autofetch": true,
+  "files.autoSave": "afterDelay",
+  "workbench.colorTheme": "One Dark Pro",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "mervin.markdown-formatter"
+  },
+  "sync.gist": "ba6e5662581ae36a2f30d600a6f25b72",
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "editor.columnSelection": false,
+  // "editor.fontFamily": "Monaco for Powerline,Menlo, Monaco, 'Courier New', monospace",
+  "editor.multiCursorModifier": "alt",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command",
+    "switch:command",
+    "push:menu"
+  ],
+  "gitlens.views.repositories.files.layout": "list",
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+// 平⾯图编辑器
+// {
+// // 需要安装插件: "Vetur" "Prettier - Code formatter" "ESLint"
+// // vscode配置
+// "editor.detectIndentation": false,
+// // "editor.formatOnSave": true,
+// // "editor.formatOnPaste": true,
+// "editor.tabSize": 4,
+// // 保存时按eslint格式进⾏修复
+// // "eslint.autoFixOnSave": true,
+// "html.format.wrapLineLength": 150,
+// // prettier配置
+// // ⾏宽
+// "prettier.printWidth": 150,
+// // 保留结尾的分号:";"
+// "prettier.semi": true,
+// // 使⽤单引号
+// "prettier.singleQuote": false,
+// // 缩进4个空格
+// "prettier.tabWidth": 4,
+// // vetur配置: vue⽂件格式化
+// "vetur.format.options.tabSize": 4,
+// // "vetur.format.defaultFormatter.html": "prettyhtml",
+// "vetur.format.defaultFormatter.js": "prettier",
+// "vetur.format.defaultFormatter.ts": "prettier",
+// "vetur.format.defaultFormatterOptions": {
+// "prettyhtml": {
+// "printWidth": 150,
+// "singleQuote": false,
+// "wrapAttributes": false,
+// "sortAttributes": false
+// },
+// "prettier": {
+// "semi": true,
+// "singleQuote": false,
+// "printWidth": 150
+// }
+// },
+// "[javascript]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "[ts]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "svn.enableProposedApi": "none",
+// "glassit.alpha": 250,
+// "[vue]": {
+// "editor.defaultFormatter": "octref.vetur"
+// },
+// "[html]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "[json]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "git.autofetch": true,
+// "files.autoSave": "afterDelay",
+// "workbench.colorTheme": "One Dark Pro",
+// "editor.quickSuggestions": {
+// "strings": true
+// },
+// "[jsonc]": {
+// "editor.defaultFormatter": "vscode.json-language-features"
+// },
+// "[markdown]": {
+// "editor.defaultFormatter": "mervin.markdown-formatter"
+// },
+// "sync.gist": "ba6e5662581ae36a2f30d600a6f25b72",
+// "terminal.integrated.shell.linux": "/bin/zsh",
+// "[typescript]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "workbench.iconTheme": "vscode-icons",
+// "editor.columnSelection": false,
+// "editor.fontFamily": "Monaco for Powerline,Menlo, Monaco, 'Courier New', monospace",
+// "editor.multiCursorModifier": "alt",
+// "diffEditor.ignoreTrimWhitespace": false,
+// "editor.minimap.enabled": false,
+// "gitlens.gitCommands.skipConfirmations": [
+// "fetch:command",
+// "stash-push:command",
+// "switch:command",
+// "push:menu"
+// ],
+// "gitlens.views.repositories.files.layout": "list",
+// "breadcrumbs.enabled": true
+// }
+// 万达说明书
+// {
+// // 需要安装插件: "Vetur" "Prettier - Code formatter" "ESLint"
+// // vscode配置
+// "editor.detectIndentation": false,
+// // "editor.formatOnSave": true,
+// // "editor.formatOnPaste": true,
+// "editor.tabSize": 4,
+// // 保存时按eslint格式进⾏修复
+// // "eslint.autoFixOnSave": true,
+// "html.format.wrapLineLength": 150,
+// // prettier配置
+// // ⾏宽
+// "prettier.printWidth": 150,
+// // 去掉结尾的分号:";"
+// "prettier.semi": false,
+// // 使⽤单引号
+// "prettier.singleQuote": true,
+// // 缩进4个空格
+// "prettier.tabWidth": 4,
+// // vetur配置: vue⽂件格式化
+// "vetur.format.options.tabSize": 4,
+// "vetur.format.defaultFormatter.html": "prettyhtml",
+// "vetur.format.defaultFormatter.js": "prettier",
+// "vetur.format.defaultFormatterOptions": {
+// "prettyhtml": {
+// "printWidth": 150,
+// "singleQuote": true,
+// "wrapAttributes": false,
+// "sortAttributes": false
+// },
+// "prettier": {
+// "semi": false,
+// "singleQuote": true,
+// "printWidth": 150
+// }
+// },
+// "[javascript]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "svn.enableProposedApi": "none",
+// "glassit.alpha": 250,
+// "[vue]": {
+// "editor.defaultFormatter": "octref.vetur"
+// },
+// "window.zoomLevel": 0,
+// "[html]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "[json]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "git.autofetch": true,
+// "files.autoSave": "afterDelay",
+// "workbench.colorTheme": "One Dark Pro",
+// "editor.quickSuggestions": {
+// "strings": true
+// },
+// "[jsonc]": {
+// "editor.defaultFormatter": "vscode.json-language-features"
+// },
+// "[markdown]": {
+// "editor.defaultFormatter": "mervin.markdown-formatter"
+// },
+// "sync.gist": "ba6e5662581ae36a2f30d600a6f25b72",
+// "terminal.integrated.shell.linux": "/bin/zsh",
+// "[typescript]": {
+// "editor.defaultFormatter": "esbenp.prettier-vscode"
+// },
+// "workbench.iconTheme": "vscode-icons",
+// "editor.columnSelection": false,
+// "editor.fontFamily": "Monaco for Powerline,Menlo, Monaco, 'Courier New', monospace",
+// "editor.multiCursorModifier": "alt",
+// "diffEditor.ignoreTrimWhitespace": false,
+// "editor.minimap.enabled": false,
+// "gitlens.gitCommands.skipConfirmations": [
+// "fetch:command",
+// "stash-push:command",
+// "switch:command",
+// "push:menu"
+// ],
+// "gitlens.views.repositories.files.layout": "list"
+// }

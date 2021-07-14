@@ -1,28 +1,28 @@
 <template>
-    <div>hhhh</div>
+  <div>hhhh</div>
 </template>
 <script>
 export default {
-    name: 'HelloWorld',
-    props: {
-        msg: {
-            type: String,
-            default: '',
-        },
+  name: "HelloWorld",
+  props: {
+    msg: {
+      type: String,
+      default: "",
     },
-    data() {
-        return {}
-    },
-    components: {},
-    beforeMount() {},
-    mounted() {
-        console.log(':::', this.msg)
-    },
-    methods: {},
-}
+  },
+  data() {
+    return {};
+  },
+  components: {},
+  beforeMount() {},
+  mounted() {
+    console.log(":::", this.msg);
+  },
+  methods: {},
+};
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 div {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 </style>
